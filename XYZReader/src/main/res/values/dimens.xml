@@ -10,9 +10,10 @@
     <dimen name="image_width">120dp</dimen>
     <dimen name="image_height">120dp</dimen>
     <dimen name="up_button_width">56dp</dimen>
-    <dimen name="banner_height">240dp</dimen>
+    <dimen name="banner_height">112dp</dimen>
     <dimen name="fab_width">56dp</dimen>
     <dimen name="fab_height">56dp</dimen>
-    <dimen name="app_bar_elevation">0dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
+    <dimen name="details_elevation">2dp</dimen>
 
 </resources>

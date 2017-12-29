@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -65,10 +67,17 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         mRecyclerView = findViewById(R.id.recycler_view);
         getLoaderManager().initLoader(0, null, this);
-
-        if (savedInstanceState == null) {
-            refresh();
+        if (isNetworkConnected()) {
+            if (savedInstanceState == null) {
+                refresh();
+            }
+        } else {
+            Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.no_internet), Snackbar.LENGTH_LONG);
+            View sbView = snackbar.getView();
+            sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            snackbar.show();
         }
+
     }
 
     private void refresh() {
@@ -124,6 +133,12 @@ public class ArticleListActivity extends AppCompatActivity implements
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mRecyclerView.setAdapter(null);
+    }
+
+    public boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
+        return cm.getActiveNetworkInfo() != null;
     }
 
     private class Adapter extends RecyclerView.Adapter<ViewHolder> {
