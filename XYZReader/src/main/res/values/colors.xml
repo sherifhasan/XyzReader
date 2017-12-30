@@ -35,5 +35,7 @@
     <color name="divider">#BDBDBD</color>
     <color name="black">#000</color>
     <color name="black_alpha_40">#66000000</color>
-    <color name="White">#fff</color>
+    <color name="background_color">#fff</color>
+    <color name="my_statusbar_color">@android:color/transparent</color>
+
 </resources>
